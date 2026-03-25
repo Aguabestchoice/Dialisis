@@ -141,7 +141,7 @@
 <body>
 
 <header>
-    <h1>SISTEMA INTEGRAL DE NEFROLOGÍA CORTEX-200</h1>
+    <h1>SISTEMA INTEGRAL DE NEFROLOGÍA</h1>
     <p>Módulo de diálisis y terapias extracorpóreas avanzadas</p>
 </header>
 
