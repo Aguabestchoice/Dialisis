@@ -2,236 +2,303 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Masterclass en Diálisis</title>
-    <link href="https://fonts.googleapis.com/css2?family=Segoe+UI:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <title>Plataforma de alta especialidad en Nefrología</title>
     <style>
         :root {
-            --renal-blue: #004a99;
-            --clinical-white: #ffffff;
-            --soft-grey: #f4f7f6;
-            --border-color: #d1d9e6;
-            --accent-red: #b00020;
-            --success-green: #2e7d32;
+            --renal-dark: #0a2e52;
+            --renal-blue: #1b4f72;
+            --renal-light: #d4e6f1;
+            --accent: #b9944d;
+            --white: #ffffff;
+            --text: #1c2833;
+            --success: #27ae60;
+            --error: #c0392b;
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
             line-height: 1.6;
-            color: #333;
-            background-color: var(--soft-grey);
+            color: var(--text);
+            background-color: #f2f4f4;
             margin: 0;
             padding: 0;
         }
 
         header {
-            background-color: var(--renal-blue);
-            color: white;
-            padding: 2rem 1rem;
+            background: linear-gradient(135deg, var(--renal-dark), var(--renal-blue));
+            color: var(--white);
+            padding: 40px 20px;
             text-align: center;
-            border-bottom: 5px solid #003366;
+            border-bottom: 4px solid var(--accent);
         }
 
-        nav {
-            background: #fff;
-            padding: 10px;
+        .main-nav {
+            background: var(--white);
+            padding: 15px;
             position: sticky;
             top: 0;
             display: flex;
             justify-content: center;
-            gap: 20px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            gap: 25px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
             z-index: 1000;
         }
 
-        nav a {
+        .main-nav a {
             text-decoration: none;
             color: var(--renal-blue);
-            font-weight: 600;
+            font-weight: bold;
             font-size: 0.9rem;
+            text-transform: uppercase;
         }
 
         .container {
-            max-width: 900px;
-            margin: 20px auto;
-            background: white;
-            padding: 40px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            max-width: 1100px;
+            margin: 30px auto;
+            background: var(--white);
+            padding: 50px;
             border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
         }
 
         h2 {
-            color: var(--renal-blue);
-            border-left: 5px solid var(--renal-blue);
+            color: var(--renal-dark);
+            border-left: 6px solid var(--accent);
             padding-left: 15px;
-            margin-top: 40px;
+            margin-top: 45px;
+            text-transform: uppercase;
         }
 
-        .formula-box {
-            background: #eef2f7;
-            padding: 20px;
-            border-radius: 5px;
-            font-family: "Courier New", Courier, monospace;
-            border: 1px solid var(--border-color);
-            margin: 20px 0;
-        }
-
-        .quiz-container {
-            background: #fff;
-            border: 2px solid var(--renal-blue);
+        .calc-box {
+            background: var(--renal-light);
             padding: 25px;
-            border-radius: 10px;
-            margin-top: 50px;
+            border-radius: 12px;
+            margin: 30px 0;
+            border: 1px solid #aed6f1;
         }
 
-        .question {
-            margin-bottom: 25px;
-            padding-bottom: 15px;
-            border-bottom: 1px dotted #ccc;
+        .calc-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
         }
 
-        .options label {
-            display: block;
-            margin: 10px 0;
+        input, select {
+            width: 100%;
             padding: 10px;
-            background: #f9f9f9;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: 0.3s;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
         }
 
-        .options label:hover {
-            background: #f0f4f8;
-        }
-
-        button {
-            background: var(--renal-blue);
+        .btn {
+            background: var(--renal-dark);
             color: white;
+            padding: 12px 25px;
             border: none;
-            padding: 15px 30px;
             border-radius: 5px;
             cursor: pointer;
-            font-size: 1rem;
             font-weight: bold;
+            transition: 0.3s;
+            margin-top: 15px;
         }
 
-        #resultArea {
+        .btn:hover { background: var(--renal-blue); }
+
+        .theory-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
             margin-top: 20px;
-            display: none;
+        }
+
+        @media (max-width: 768px) { .theory-grid { grid-template-columns: 1fr; } }
+
+        .quiz-card {
+            background: #fdfefe;
+            border: 1px solid #ebedef;
             padding: 20px;
-            border-radius: 5px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+        }
+
+        #quiz-results {
+            display: none;
+            padding: 30px;
+            margin-top: 30px;
+            border-radius: 8px;
         }
 
         footer {
+            background: var(--renal-dark);
+            color: white;
             text-align: center;
-            padding: 20px;
-            font-size: 0.8rem;
-            color: #777;
+            padding: 30px;
+            margin-top: 50px;
         }
     </style>
 </head>
 <body>
 
 <header>
-    <h1>Compendio de terapias de reemplazo renal</h1>
-    <p>Nivel: Grado médico a subespecialidad en Nefrología</p>
+    <h1>SISTEMA INTEGRAL DE NEFROLOGÍA CORTEX-200</h1>
+    <p>Módulo de diálisis y terapias extracorpóreas avanzadas</p>
 </header>
 
-<nav>
-    <a href="#teoria">Fundamentos</a>
-    <a href="#hemodialisis">Hemodiálisis</a>
-    <a href="#peritoneal">Diálisis peritoneal</a>
-    <a href="#examen">Autoevaluación</a>
+<nav class="main-nav">
+    <a href="#fisiologia">Fisiología</a>
+    <a href="#calculadora">Calculadora Kt/V</a>
+    <a href="#hemodialisis">HD & HDF</a>
+    <a href="#peritoneal">DP</a>
+    <a href="#examen">Certificación</a>
 </nav>
 
 <div class="container">
-    <section id="teoria">
-        <h2>1. Fisiología y biofísica</h2>
-        <p>La diálisis se rige por leyes físicas de transferencia de masa. La eficacia depende de la permeabilidad de la membrana (coeficiente KoA) y el gradiente de presión.</p>
-        <ul>
-            <li><strong>Difusión:</strong> Eliminación de moléculas pequeñas (Urea: 60 Da).</li>
-            <li><strong>Convección:</strong> Eliminación de moléculas medias (β2-m: 11,800 Da).</li>
-        </ul>
-        <div class="formula-box">
-            Dosis de Diálisis (Kt/V):<br>
-            Donde K = Aclaramiento, t = tiempo, V = Volumen de distribución (Agua corporal total).
+    
+    <section id="fisiologia">
+        <h2>I. Dinámica de Solutos y Membranas</h2>
+        <div class="theory-grid">
+            <div>
+                <h3>1.1 Coeficiente KoA</h3>
+                <p>El KoA (Productivity de transferencia de masa) define la eficiencia del dializador para la urea. Valores >700 mL/min se consideran de alta eficiencia.</p>
+                <ul>
+                    <li><strong>Bajo Flujo:</strong> KUF < 15 ml/h/mmHg</li>
+                    <li><strong>Alto Flujo:</strong> KUF > 20 ml/h/mmHg</li>
+                </ul>
+            </div>
+            <div>
+                <h3>1.2 El Modelo de Tres Poros</h3>
+                <p>En Diálisis Peritoneal, el transporte ocurre a través del endotelio capilar peritoneal mediante:</p>
+                <ul>
+                    <li><strong>Acuaporinas:</strong> Solo agua (transcelular).</li>
+                    <li><strong>Poros Pequeños:</strong> Agua y solutos pequeños (difusión).</li>
+                    <li><strong>Poros Grandes:</strong> Proteínas y macromoléculas.</li>
+                </ul>
+            </div>
         </div>
+    </section>
+
+    <section id="calculadora" class="calc-box">
+        <h2>II. Calculadora de Adecuación (Daugirdas II)</h2>
+        <div class="calc-grid">
+            <div>
+                <label>Urea Pre-Diálisis (mg/dL)</label>
+                <input type="number" id="preUrea" value="150">
+            </div>
+            <div>
+                <label>Urea Post-Diálisis (mg/dL)</label>
+                <input type="number" id="postUrea" value="45">
+            </div>
+            <div>
+                <label>Horas de Sesión (h)</label>
+                <input type="number" id="timeH" value="4">
+            </div>
+            <div>
+                <label>Peso Post-Sesión (kg)</label>
+                <input type="number" id="weight" value="70">
+            </div>
+            <div>
+                <label>Ultrafiltración (L)</label>
+                <input type="number" id="uf" value="2.5">
+            </div>
+        </div>
+        <button class="btn" onclick="calculateKTV()">Calcular Kt/V Single-Pool</button>
+        <div id="ktvResult" style="margin-top:15px; font-weight:bold; font-size:1.2rem; color:var(--renal-dark);"></div>
     </section>
 
     <section id="hemodialisis">
-        <h2>2. Hemodiálisis y HDF-OL</h2>
-        <p>La Hemodiafiltración en línea (HDF-OL) combina difusión y convección masiva mediante el uso de agua ultrapura como líquido de sustitución.</p>
-        <p><strong>Acceso Vascular:</strong> El estándar es la FAV nativa (Regla de los 6 para maduración: 6mm de diámetro, 6mm de profundidad, flujo >600ml/min).</p>
-    </section>
-
-    <section id="peritoneal">
-        <h2>3. Diálisis Peritoneal (DP)</h2>
-        <p>Basada en la membrana peritoneal. El transporte se define por el <strong>PET (Peritoneal Equilibrium Test)</strong>.</p>
-        <ul>
-            <li><strong>Transportadores Rápidos:</strong> Pierden ultrafiltración rápido (usar ciclos cortos).</li>
-            <li><strong>Transportadores Lentos:</strong> Aclaran urea lento (usar permanencias largas).</li>
-        </ul>
-    </section>
-
-    <section id="examen" class="quiz-container">
-        <h2>Examen de Certificación Médica</h2>
-        <div id="quizContent">
-            <div class="question">
-                <p><strong>1. ¿Qué mecanismo es superior para aclarar moléculas de 12,000 Daltons en diálisis?</strong></p>
-                <div class="options">
-                    <label><input type="radio" name="p1" value="0"> Difusión pasiva</label>
-                    <label><input type="radio" name="p1" value="1"> Convección (Arrastre de solvente)</label>
-                    <label><input type="radio" name="p1" value="0"> Adsorción proteica</label>
-                </div>
-            </div>
-
-            <div class="question">
-                <p><strong>2. ¿Por qué ocurre el edema cerebral en el Síndrome de Desequilibrio?</strong></p>
-                <div class="options">
-                    <label><input type="radio" name="p2" value="1"> Gradiente osmótico inverso por urea atrapada en el SNC</label>
-                    <label><input type="radio" name="p2" value="0"> Hipernatremia post-diálisis</label>
-                    <label><input type="radio" name="p2" value="0"> Hipotensión súbita durante la ultrafiltración</label>
-                </div>
-            </div>
-
-            <div class="question">
-                <p><strong>3. En un paciente "Transportador Rápido" en DP, ¿qué sucede con la glucosa?</strong></p>
-                <div class="options">
-                    <label><input type="radio" name="p3" value="0"> Se mantiene en la cavidad por más de 12 horas</label>
-                    <label><input type="radio" name="p3" value="0"> No atraviesa la membrana peritoneal</label>
-                    <label><input type="radio" name="p3" value="1"> Se absorbe rápidamente hacia la sangre, perdiendo poder osmótico</label>
-                </div>
-            </div>
+        <h2>III. Prescripción en HD y HDF-OL</h2>
+        <p>La <strong>Hemodiafiltración en Línea (HDF-OL)</strong> representa la frontera actual. El aclaramiento total (K) es la suma de la difusión y la convección ($K_{total} = K_{diff} + K_{conv}$).</p>
+        <div style="background:#e8f8f5; padding:15px; border-left:5px solid #1abc9c;">
+            <strong>Evidencia ESHOL:</strong> Se requiere un volumen de sustitución >23 L/sesión para demostrar reducción en mortalidad por todas las causas.
         </div>
-
-        <button onclick="checkQuiz()">Calificar Examen</button>
-
-        <div id="resultArea"></div>
     </section>
+
+    <section id="examen">
+        <h2>IV. Examen de Certificación (15 Reactivos)</h2>
+        <div id="quiz-area"></div>
+        <button class="btn" style="width:100%;" onclick="evaluateQuiz()">Finalizar Examen y Ver Retroalimentación</button>
+        <div id="quiz-results"></div>
+    </section>
+
 </div>
 
 <footer>
-    <p>Basado en guías KDIGO y KDOQI 2026. Formato APA 7ma edición.</p>
+    <p>© 2026 CORTEX-200. Referencias: Guías KDIGO 2024, KDOQI 2025, ISPD 2026.</p>
 </footer>
 
 <script>
-    function checkQuiz() {
+    // Lógica de la Calculadora
+    function calculateKTV() {
+        const pre = parseFloat(document.getElementById('preUrea').value);
+        const post = parseFloat(document.getElementById('postUrea').value);
+        const t = parseFloat(document.getElementById('timeH').value);
+        const w = parseFloat(document.getElementById('weight').value);
+        const uf = parseFloat(document.getElementById('uf').value);
+
+        const R = post / pre;
+        // Fórmula de Daugirdas II: Kt/V = -ln(R - 0.008*t) + (4 - 3.5*R) * (UF/W)
+        const ktv = -Math.log(R - (0.008 * t)) + (4 - (3.5 * R)) * (uf / w);
+        
+        const status = ktv >= 1.2 ? "ADECUADO" : "SUB-ÓPTIMO";
+        document.getElementById('ktvResult').innerHTML = `Kt/V Estimado: ${ktv.toFixed(2)} (${status})`;
+    }
+
+    // Lógica del Examen
+    const questions = [
+        { q: "¿Cuál es el cofactor necesario para que el Citrato actúe como anticoagulante?", a: ["Magnesio", "Calcio", "Vitamina K"], c: 1 },
+        { q: "El fenómeno de 'Cribado de Sodio' se evidencia por:", a: ["Hipernatremia", "Hiponatremia en el efluente inicial", "Acidosis metabólica"], c: 1 },
+        { q: "En HDF-OL, ¿qué parámetro limita el volumen de sustitución?", a: ["Flujo de dializado", "Hemoconcentración (Fracción de Filtración)", "Presión arterial media"], c: 1 },
+        { q: "¿Qué complicación se asocia a la pérdida de biocompatibilidad en membranas de celulosa?", a: ["Leucopenia precoz", "Hiperpotasemia", "Hiperglucemia"], c: 0 },
+        { q: "Un transporte peritoneal 'Rápido' se asocia a:", a: ["Alta ultrafiltración", "Baja ultrafiltración por absorción de glucosa", "Bajo aclaramiento de urea"], c: 1 },
+        { q: "El modelo cinético de urea postula que 'V' es equivalente a:", a: ["Volumen plasmático", "Agua Corporal Total", "Espacio extracelular"], c: 1 },
+        { q: "La principal ventaja de la Icodextrina es su transporte vía:", a: ["Poros pequeños", "Difusión facilitada", "Presión coloidosmótica (Intercambios largos)"], c: 2 },
+        { q: "Meta de Hemoglobina en ERC G5D según KDIGO:", a: ["12-14 g/dL", "10-11.5 g/dL", ">13 g/dL"], c: 1 },
+        { q: "Indicación absoluta de inicio de diálisis de urgencia:", a: ["Creatinina > 10", "Pericarditis urémica", "Anemia grado IV"], c: 1 },
+        { q: "El aclaramiento de moléculas medias (>10,000 Da) es nulo en:", a: ["Hemodiálisis de bajo flujo", "Hemodiafiltración", "Diálisis Peritoneal"], c: 0 },
+        { q: "En la TRRC, la pre-dilución ayuda a:", a: ["Aumentar la urea", "Disminuir la coagulación del filtro", "Eliminar potasio más rápido"], c: 1 },
+        { q: "¿Qué mide el PET (Prueba de Equilibrio Peritoneal)?", a: ["Función renal residual", "Permeabilidad de la membrana peritoneal", "Gasto cardíaco"], c: 1 },
+        { q: "Causa más frecuente de peritonitis en DP:", a: ["S. epidermidis / S. aureus", "E. coli", "Cándida"], c: 0 },
+        { q: "El 'Rebote de Urea' se debe a:", a: ["Falla del dializador", "Cinética multicompartimental", "Ingesta excesiva de proteínas"], c: 1 },
+        { q: "La toxina urémica considerada prototipo de moléculas medias es:", a: ["Urea", "Creatinina", "B2-microglobulina"], c: 2 }
+    ];
+
+    const quizArea = document.getElementById('quiz-area');
+    questions.forEach((item, index) => {
+        quizArea.innerHTML += `
+            <div class="quiz-card">
+                <p><strong>${index + 1}. ${item.q}</strong></p>
+                ${item.a.map((opt, i) => `
+                    <label style="display:block; margin:5px 0;">
+                        <input type="radio" name="q${index}" value="${i}"> ${opt}
+                    </label>
+                `).join('')}
+            </div>
+        `;
+    });
+
+    function evaluateQuiz() {
         let score = 0;
-        let total = 3;
-        const q1 = document.querySelector('input[name="p1"]:checked');
-        const q2 = document.querySelector('input[name="p2"]:checked');
-        const q3 = document.querySelector('input[name="p3"]:checked');
+        let incorrectas = [];
+        questions.forEach((item, index) => {
+            const sel = document.querySelector(`input[name="q${index}"]:checked`);
+            if(sel && parseInt(sel.value) === item.c) score++;
+            else incorrectas.push(index + 1);
+        });
 
-        if (!q1 || !q2 || !q3) {
-            alert("Por favor, responde todas las preguntas del examen.");
-            return;
-        }
+        const res = document.getElementById('quiz-results');
+        res.style.display = 'block';
+        res.style.backgroundColor = score > 12 ? "#e8f8f5" : "#fdedec";
+        res.innerHTML = `
+            <h3>Calificación Final: ${score}/15 (${((score/15)*100).toFixed(1)}%)</h3>
+            <p><strong>Preguntas fallidas:</strong> ${incorrectas.length ? incorrectas.join(', ') : 'Ninguna'}</p>
+            <div style="margin-top:20px;">
+                <strong>Retroalimentación:</strong><br>
+                ${score > 12 ? 'Excelente. Estás listo para el examen de subespecialidad.' : 'Recomendamos repasar la biofísica de membranas y guías de adecuación.'}
+            </div>
+        `;
+    }
+</script>
 
-        score = parseInt(q1.value) + parseInt(q2.value) + parseInt(q3.value);
-        
-        const resultArea = document.getElementById('resultArea');
-        resultArea.style.display = 'block';
-        
-        let feedback = "";
-        if(score === 3) {
-            resultArea.style.backgroundColor = "#e8f5e9";
-            feedback = "<strong>Fortaleza:</strong> Dominio excelente
+</body>
+</html>
